@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  # Eclipse Mosquitto MQTT Broker
+  mosquitto:
+    build: .
+    environment:
+      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
+      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
+    image: eclipse-mosquitto
+    container_name: eclipse-mosquitto
+    restart: always
+    volumes:
+      - ./config:/mosquitto/config:ro
+      - ./data:/mosquitto/data
+      - ./log:/mosquitto/log
+    ports:
+      - 1883:1883
