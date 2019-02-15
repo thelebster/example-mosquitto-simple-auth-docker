@@ -1,3 +1,4 @@
 *.log
 *.db
 .env
+passwordfile

@@ -6,8 +6,7 @@ services:
   mosquitto:
     build: .
     environment:
-      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
-      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
+      - MOSQUITTO_PASSWORDFILE=${MOSQUITTO_PASSWORDFILE}
     image: eclipse-mosquitto
     container_name: eclipse-mosquitto
     restart: always
