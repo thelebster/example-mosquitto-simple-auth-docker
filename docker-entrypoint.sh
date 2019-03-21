@@ -1,14 +1,20 @@
 #!/bin/ash
 
 set -e
+printf "============= env ==================="
 
-if ( [ -z "${MOSQUITTO_USERNAME}" ] || [ -z "${MOSQUITTO_PASSWORD}" ] ); then
-  echo "MOSQUITTO_USERNAME or MOSQUITTO_PASSWORD not defined"
-  exit 1
-fi
+printenv
+printf "\n======= end ========="
 
-# create mosquitto passwordfile
-touch passwordfile
-mosquitto_passwd -b passwordfile $MOSQUITTO_USERNAME $MOSQUITTO_PASSWORD
+printf "\n============= /etc/mosquitto.conf ==================="
+
+cat /etc/mosquitto.conf
+
+printf "\n======= end ========="
+
+# the following address Group ID issues and permissions
+# container user is mosquitto
+chmod -R o+w /mosquitto/data
+chmod -R o+w /mosquitto/log
 
 exec "$@"

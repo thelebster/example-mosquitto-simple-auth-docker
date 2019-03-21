@@ -5,15 +5,11 @@ services:
   # Eclipse Mosquitto MQTT Broker
   mosquitto:
     build: .
-    environment:
-      - MOSQUITTO_USERNAME=${MOSQUITTO_USERNAME}
-      - MOSQUITTO_PASSWORD=${MOSQUITTO_PASSWORD}
-    image: eclipse-mosquitto
+    image: cicorias/eclipse-mosquitto
     container_name: eclipse-mosquitto
+    volumes: 
+      - "/srv/modules/mosquitto/log:/mosquitto/log"
+      - "/srv/modules/mosquitto/data:/var/lib/mosquitto"
     restart: always
-    volumes:
-      - ./config:/mosquitto/config:ro
-      - ./data:/mosquitto/data
-      - ./log:/mosquitto/log
     ports:
-      - 1883:1883
+      - 1884:1883
