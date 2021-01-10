@@ -31,3 +31,8 @@ mosquitto_sub -h localhost -t test -u "mosquitto" -P "mosquitto"
 # Publish a message.
 mosquitto_pub -h localhost -t test -m "hello." -u "mosquitto" -P "mosquitto"
 ```
+
+## Changelog
+
+**Jan 10, 2021**
+* Fix write permissions for mosquitto directories. Check [this thread](https://github.com/eclipse/mosquitto/issues/1078) for details.
