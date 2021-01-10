@@ -1,6 +1,6 @@
-# Running Mosquitto with auth in Docker
+# Running Mosquitto using username and password authentication
 
-Simple example of how to run Mosquitto with auth in Docker. I have used the [official Eclipse Mosquitto MQTT Broker Docker image](https://hub.docker.com/_/eclipse-mosquitto/).
+Configure Mosquitto MQTT broker to require client authentication using a valid username and password. Build on top of [official Eclipse Mosquitto MQTT Broker Docker image](https://hub.docker.com/_/eclipse-mosquitto/).
 
 ## Usage
 
