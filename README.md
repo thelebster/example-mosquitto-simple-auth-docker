@@ -11,6 +11,8 @@ MOSQUITTO_USERNAME=mosquitto
 MOSQUITTO_PASSWORD=mosquitto
 ```
 
+To run a specific version of Mosquitto, check [available tags](https://hub.docker.com/_/eclipse-mosquitto?tab=tags) and add `MOSQUITTO_VERSION=1.5.6` line to `.env` file.
+
 ### Build and run
 
 ```
@@ -36,3 +38,4 @@ mosquitto_pub -h localhost -t test -m "hello." -u "mosquitto" -P "mosquitto"
 
 **Jan 10, 2021**
 * Fix write permissions for mosquitto directories. Check [this thread](https://github.com/eclipse/mosquitto/issues/1078) for details.
+* Allow to run a specific version of Mosquitto docker image.
