@@ -16,7 +16,6 @@ services:
     container_name: eclipse-mosquitto
     restart: always
     volumes:
-      - ./config:/mosquitto/config:ro
       - ./data:/mosquitto/data
       - ./log:/mosquitto/log
     ports:

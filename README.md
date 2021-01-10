@@ -39,3 +39,4 @@ mosquitto_pub -h localhost -t test -m "hello." -u "mosquitto" -P "mosquitto"
 **Jan 10, 2021**
 * Fix write permissions for mosquitto directories. Check [this thread](https://github.com/eclipse/mosquitto/issues/1078) for details.
 * Allow to run a specific version of Mosquitto docker image.
+* Add support for Mosquitto 2.x. Check [Migrating from 1.x to 2.0](https://mosquitto.org/documentation/migrating-to-2-0/) for details.
