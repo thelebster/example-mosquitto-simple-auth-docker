@@ -1,6 +1,6 @@
 # Running Mosquitto using username and password authentication
 
-Configure Mosquitto MQTT broker to require client authentication using a valid username and password. Build on top of [official Eclipse Mosquitto MQTT Broker Docker image](https://hub.docker.com/_/eclipse-mosquitto/).
+Configure Mosquitto MQTT broker to require client authentication using a valid username and password. Built on top of [official Eclipse Mosquitto MQTT Broker Docker image](https://hub.docker.com/_/eclipse-mosquitto/).
 
 ## Usage
 
@@ -13,11 +13,48 @@ MOSQUITTO_PASSWORD=mosquitto
 
 To run a specific version of Mosquitto, check [available tags](https://hub.docker.com/_/eclipse-mosquitto?tab=tags) and add `MOSQUITTO_VERSION=1.5.6` line to `.env` file.
 
-### Build and run
+### Build and run with [docker compose](https://docs.docker.com/compose/)
 
-```
+```shell
 docker-compose build
 docker-compose up -d
+```
+
+### Build and run with docker
+
+Don't use `latest` tag to avoid any compatibility issues.
+
+```shell
+# Use eclipse-mosquitto:latest
+docker build --build-arg MOSQUITTO_VERSION=latest -t mosquitto:latest .
+
+# Run as daemon
+docker run --name mosquitto -d \
+  --restart=always \
+  --publish 1883:1883 -p 2222:22 \
+  -e MOSQUITTO_USERNAME=mosquitto \
+  -e MOSQUITTO_PASSWORD=mosquitto \
+  --volume "$(pwd)"/data:/mosquitto/data \
+  --volume "$(pwd)"/log:/mosquitto/log \
+  mosquitto:latest
+```
+
+```shell
+# Use eclipse-mosquitto:1.5.6
+docker build --build-arg MOSQUITTO_VERSION=1.5.6 -t mosquitto:1.5.6 .
+
+docker run -it --rm --name mosquitto \
+  --publish 1883:1883 -p 2222:22 \
+  -e MOSQUITTO_USERNAME=mosquitto \
+  -e MOSQUITTO_PASSWORD=mosquitto \
+  --volume "$(pwd)"/data:/mosquitto/data \
+  --volume "$(pwd)"/log:/mosquitto/log \
+  mosquitto:1.5.6
+```
+
+```shell
+# List images
+docker image ls
 ```
 
 ### Testing
@@ -26,7 +63,7 @@ Try the [MQTT client](http://mqttfx.org/) to connect to the Mosquitto MQTT Broke
 
 Or use official `mosquitto_pub` and `mosquitto_sub` utilities for publishing and subscribing.
 
-```
+```shell
 # Subscribe to topic.
 mosquitto_sub -h localhost -t test -u "mosquitto" -P "mosquitto"
 
@@ -35,6 +72,9 @@ mosquitto_pub -h localhost -t test -m "hello." -u "mosquitto" -P "mosquitto"
 ```
 
 ## Changelog
+
+**June 5, 2022**
+* Provide an instructions of how to run service with just a Docker.
 
 **Jan 10, 2021**
 * Fix write permissions for mosquitto directories. Check [this thread](https://github.com/eclipse/mosquitto/issues/1078) for details.
